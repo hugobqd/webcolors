@@ -5,6 +5,8 @@ import PALETTE_CSS from './db/css';
 import PALETTE_MATERIAL from './db/material';
 import PALETTE_CRAYON from './db/crayon';
 import PALETTE_TAILWINDCSS from './db/tailwindcss';
+import PALETTE_CHARKRA_UI from './db/chakra-ui';
+import PALETTE_BOOTSTRAP from './db/bootstrap';
 import { getClosestColors } from './fx/getClosestColors';
 import { isInSavedColors } from './fx/isInSavedColors';
 import Card from './Card';
@@ -63,6 +65,8 @@ const PALETTES = [
   ["crayon", false], 
   ["material", false],
   ["tailwindcss", false],
+  ["chakraui", false],
+  ["bootstrap", false],
 ];
 
 // Get localstorage data
@@ -181,6 +185,7 @@ class App extends Component {
    */ 
 
   createPalette = () => {
+
     let palette = []
 
     if (this.state.settingPalette.css) {
@@ -195,6 +200,14 @@ class App extends Component {
     if (this.state.settingPalette.tailwindcss) {
       palette = [...palette, ...PALETTE_TAILWINDCSS]
     }
+    if (this.state.settingPalette.chakraui) {
+      palette = [...palette, ...PALETTE_CHARKRA_UI]
+    }
+    if (this.state.settingPalette.bootstrap) {
+      palette = [...palette, ...PALETTE_BOOTSTRAP]
+    }
+    console.log('createPalette', palette.length)
+
     return palette
   }
 
