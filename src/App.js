@@ -1,4 +1,4 @@
-import React, {Fragment, Component} from 'react';
+import React, {Component} from 'react';
 import tinycolor from "tinycolor2"
 import { ChromePicker } from 'react-color';
 import PALETTE_CSS from './db/css';
@@ -57,7 +57,6 @@ const Sidebar = Keyframes.Spring({
 const LUM_LIMIT = .25
 const RESULTS_LENGTH = 4
 const INIT_COLOR = tinycolor.random().toHexString()
-const SIDEBAR_WIDTH = 210
 // Checkbox:
 const PALETTES = [
   ["css", true], 

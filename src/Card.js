@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { isInSavedColors } from './fx/isInSavedColors';
-import {useSpring, animated, useTrail, config} from 'react-spring'
+import {useSpring, animated, config} from 'react-spring'
 // import { delay } from 'q';
 import copy from 'copy-to-clipboard';
 
