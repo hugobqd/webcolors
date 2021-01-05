@@ -31,7 +31,6 @@ const Card = (props) => {
     from: {
       position: 'absolute',
       width: '100%',
-      color: 'white',
       bottom: '50%',
       textAlign: 'center',
       left: 0,
