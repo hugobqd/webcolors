@@ -348,6 +348,14 @@ class App extends Component {
                   <form onSubmit={this.handleFormSubmit}>
                     {this.createCheckboxes()}
                   </form>
+                  <hr style={{border: 'none', borderTop: '1px solid Silver', margin: '2em 0'}}/>
+                  <h4>Results :</h4>
+                  <input 
+                    type='number' 
+                    value={this.state.settingResultLength} 
+                    min={1} 
+                    onChange={(e)=>this.setState({settingResultLength: e.target.value})}
+                  />
               </animated.div>
             )}
           </Sidebar>
