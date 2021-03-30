@@ -7,6 +7,7 @@ import PALETTE_CRAYON from './db/crayon';
 import PALETTE_TAILWINDCSS from './db/tailwindcss';
 import PALETTE_CHARKRA_UI from './db/chakra-ui';
 import PALETTE_BOOTSTRAP from './db/bootstrap';
+import PALETTE_WEB2VI from './db/web2vi';
 import { getClosestColors } from './fx/getClosestColors';
 import { isInSavedColors } from './fx/isInSavedColors';
 import Card from './Card';
@@ -63,10 +64,11 @@ const INIT_COLOR = tinycolor.random().toHexString()
 const PALETTES = [
   ["css", true], 
   ["crayon", false], 
+  ["bootstrap", false],
   ["material", false],
   ["tailwindcss", false],
   ["chakraui", false],
-  ["bootstrap", false],
+  ["w2v", false],
 ];
 
 // Get localstorage data
@@ -191,11 +193,14 @@ class App extends Component {
     if (this.state.settingPalette.css) {
       palette = [...palette, ...PALETTE_CSS]
     }
-    if (this.state.settingPalette.material) {
-      palette = [...palette, ...PALETTE_MATERIAL]
-    }
     if (this.state.settingPalette.crayon) {
       palette = [...palette, ...PALETTE_CRAYON]
+    }
+    if (this.state.settingPalette.bootstrap) {
+      palette = [...palette, ...PALETTE_BOOTSTRAP]
+    }
+    if (this.state.settingPalette.material) {
+      palette = [...palette, ...PALETTE_MATERIAL]
     }
     if (this.state.settingPalette.tailwindcss) {
       palette = [...palette, ...PALETTE_TAILWINDCSS]
@@ -203,9 +208,10 @@ class App extends Component {
     if (this.state.settingPalette.chakraui) {
       palette = [...palette, ...PALETTE_CHARKRA_UI]
     }
-    if (this.state.settingPalette.bootstrap) {
-      palette = [...palette, ...PALETTE_BOOTSTRAP]
+    if (this.state.settingPalette.w2v) {
+      palette = [...palette, ...PALETTE_WEB2VI]
     }
+
     console.log('createPalette', palette.length)
 
     return palette
@@ -248,7 +254,7 @@ class App extends Component {
   render() {
     const {valueSafe,valueInput,savedColors} = this.state
     const currentPalette = this.createPalette()
-    const results = getClosestColors(currentPalette,valueSafe,RESULTS_LENGTH)
+    const results = getClosestColors(currentPalette,valueSafe,this.state.settingResultLength)
     
     console.log('results', results)
 
@@ -280,26 +286,27 @@ class App extends Component {
               zIndex: 11
             }}
           >
-              Favorites {savedColors.length > 0 && `(${savedColors.length})`} {this.state.openSidebar ? '☚' : '☛'}
+              Libraries {savedColors.length > 0 && `(${savedColors.length})`} {this.state.openSidebar ? '☚' : '☛'}
           </button>
-          <div style={{position: 'absolute'}}>
-            <ChromePicker
-              color={ valueSafe.toHexString() }
-              onChange={ this.colorPickerChange }
-            />
-          </div>
+
   
-          <form onSubmit={this.inputSubmit}>
+          <form onSubmit={this.inputSubmit} style={{flex: 1, position: 'relative'}}>
+            <div style={{position: 'absolute', top: '25%', left: '5vw'}}>
+              <ChromePicker
+                color={ valueSafe.toHexString() }
+                onChange={ this.colorPickerChange }
+              />
+            </div>
             <input 
               style={{
-                padding: '100px',
                 fontSize:60,
                 width: '100%',
                 textAlign: 'center',
                 backgroundColor: 'transparent',
                 border: 'none',
                 color: 'inherit',
-                fontWeight:100
+                fontWeight:100,
+                height: '100%',
               }}
               type="text" 
               ref="input" 
@@ -336,8 +343,8 @@ class App extends Component {
                     savedColors={savedColors}
                     deleteSavedColors={this.deleteSavedColors}
                   />
-                  <hr/>
-                  <h4>Settings :</h4>
+                  <hr style={{border: 'none', borderTop: '1px solid Silver', margin: '2em 0'}}/>
+                  <h4>Librairies :</h4>
                   <form onSubmit={this.handleFormSubmit}>
                     {this.createCheckboxes()}
                   </form>
